@@ -5,10 +5,9 @@ import math
 import os
 import pandas
 
-from EyewallScanner import eyewallScanner
+from eyewall_filter import filter
 
 #fp = "C:/Users/mlhuo_dkvynem/Downloads/Luara Data/20200826T090000.nc"
-radPrime = 10
 
 #result = eyewallScanner(fp, radPrime)
 
@@ -17,8 +16,6 @@ radPrime = 10
 path = "C:/Users/mlhuo_dkvynem/Downloads/Luara Data"
 os.chdir(path)
 
-from EyewallScanner import eyewallScanner
-
 #Count the number of .nc files
 imageCount = 0
 for file in os.listdir():
@@ -26,16 +23,16 @@ for file in os.listdir():
         imageCount = imageCount + 1
 
 #Iterate for .nc files
-x = np.zeros((imageCount, 10))
-imageCount = 0
-radPrime = 10
+x = np.zeros((imageCount, 8))
+count = 0
 
 for file in os.listdir():
     if file.endswith(".nc"):
         fp = f"{path}/{file}"
-        result = eyewallScanner(file, radPrime)
-        x[imageCount,:] = result
-    imageCount = imageCount + 1
+        result = filter(file)
+        x[count,:] = result
+    count = count + 1
+    print(x[count-1, 3])
 
 #Save output
 df = pandas.DataFrame(x)
