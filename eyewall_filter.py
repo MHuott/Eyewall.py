@@ -36,28 +36,35 @@ def filter(fp):
 
     s = myList[xMid - r1:xMid + r1,yMid - r1:yMid + r1]
 
+    ###print(r1)
+
+ #   print(btCenter)
+    
     #Remember to add the secondary eyewall values later
     if btCenter < 265:
         radius_1 = 0
         radius_2 = 0
         lonMid = 0
         latMid = 0
+        sLonMid = 0
+        sLatMid = 0
         moat_width = 0
         btCenter = 0
-        print('The eye has not formed')
+        #print('The eye has not formed')
 
-    elif btCenter > 265:
+    elif btCenter >= 265:
 
         from eyewall_filter_function import filter_function
         result = filter_function(bt, s, myList, r1)
-
+#        print(result[0])
+        
         pIndicator = result[0]
         lonMid = result[1]
         latMid = result[2]
-
+   
         if pIndicator == 0:
-            print('Not a primary eyewall')
-            print('Not a secondary eyewall')
+            #print('Not a primary eyewall')
+            #print('Not a secondary eyewall')
             radius_1 = 0
             radius_2 = 0
             lonMid = 0
@@ -125,7 +132,7 @@ def filter(fp):
 
 
             if sIndicator == 0:
-                print('Not a secondary eyewall')
+                #print('Not a secondary eyewall')
                 radius_2 = 0
                 moat_width = 0
                 sLonMid = 0

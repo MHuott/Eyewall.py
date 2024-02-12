@@ -5,6 +5,8 @@ import math
 import os
 import pandas
 
+print('starting')
+
 from eyewall_filter import filter
 
 #fp = "C:/Users/mlhuo_dkvynem/Downloads/Luara Data/20200826T090000.nc"
@@ -32,15 +34,12 @@ for file in os.listdir():
         result = filter(file)
         x[count,:] = result
     count = count + 1
-    print(x[count-1, 3])
+    #print(x[count, 3])
 
 #Save output
 df = pandas.DataFrame(x)
 df.to_excel("Eyewall.xlsx")
 
-#fp = "C:/Users/mlhuo_dkvynem/Downloads/Luara Data/20200826T090000.nc"
-#radPrime = 20
 
-#result = eyewallScanner(fp, radPrime)
+print('finished')
 
-#print(x)
