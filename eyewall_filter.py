@@ -59,8 +59,8 @@ def filter(fp):
 #        print(result[0])
         
         pIndicator = result[0]
-        lonMid = result[1]
-        latMid = result[2]
+        lonMin = result[1]
+        latMin = result[2]
    
         if pIndicator == 0:
             #print('Not a primary eyewall')
@@ -76,9 +76,9 @@ def filter(fp):
         elif pIndicator != 0:
 
             lat1 = math.radians(latMid)
-            lat2 = math.radians(latMid)
+            lat2 = math.radians(latMin)
             lon1 = math.radians(lonMid)
-            lon2 = math.radians(lonMid)
+            lon2 = math.radians(lonMin)
 
             #This is the difference in longitude and latitude
             dLon = lon2 - lon1
@@ -89,7 +89,7 @@ def filter(fp):
             c = 2 * math.asin(math.sqrt(a))
             r = 6371 #radius of earth in kilometers
 
-            radius_1 = c * r                                                      
+            radius_1 = c * r
 
             #Convert bt array into np array
 
