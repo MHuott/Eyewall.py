@@ -41,7 +41,7 @@ def filter(fp):
  #   print(btCenter)
     
     #Remember to add the secondary eyewall values later
-    if btCenter < 265:
+    if btCenter < 265 or latMid > 29:
         radius_1 = 0
         radius_2 = 0
         lonMid = 0
