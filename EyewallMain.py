@@ -15,7 +15,8 @@ from eyewall_filter import filter
 
 #print(result)
 
-path = "C:/Users/mlhuo_dkvynem/Downloads/Luara Data"
+#path = "C:/Users/mlhuo_dkvynem/Downloads/Luara Data"
+path = "C:/Users/gwilli18/Desktop/Eyewall Routine"
 os.chdir(path)
 
 #Count the number of .nc files

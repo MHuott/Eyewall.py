@@ -157,5 +157,11 @@ def filter(fp):
                 radius_2 = c * r
 
                 moat_width = radius_2 - radius_1
+                if radius_2 < 2*radius_1:
+                    radius_2 = 0
+                    lon_2 = 0
+                    lat_2 = 0
+                    bright_2 = 0
+                    moat_width = 0
 
     return radius_1, radius_2, lonMid, latMid, moat_width, btCenter, sLonMid, sLatMid

@@ -24,11 +24,13 @@ def filter_function(bt, s, myList, r):
     p2 = myList[xOffSet + locMin[0],yOffSet - locMin[1]][0]
     p3 = myList[xOffSet - locMin[0],yOffSet - locMin[1]][0]
     p4 = myList[xOffSet - locMin[0],yOffSet + locMin[1]][0]
+    pavg = 0.25*(p1+p2+p3+p4)
 
-    pThresh = btMin/0.9
+    pThresh = btMin/0.7
 
 
-    if p1 > pThresh or p2 > pThresh or p3 > pThresh or p4 > pThresh:
+#    if p1 > pThresh or p2 > pThresh or p3 > pThresh or p4 > pThresh:
+    if pavg > pThresh:
         indicator = 0
 
     else:
