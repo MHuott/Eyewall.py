@@ -24,16 +24,19 @@ def filter_function(bt, s, myList, r):
     p2 = myList[xOffSet + locMin[0],yOffSet - locMin[1]][0]
     p3 = myList[xOffSet - locMin[0],yOffSet - locMin[1]][0]
     p4 = myList[xOffSet - locMin[0],yOffSet + locMin[1]][0]
-    pavg = 0.25*(p1+p2+p3+p4)
+    p5 = myList[xOffSet + math.floor(0.707 * locMin[0][0]),yOffSet + math.floor(0.707 * locMin[1][0])]
+    p6 = myList[xOffSet + math.floor(0.707 * locMin[0][0]),yOffSet - math.floor(0.707 * locMin[1][0])]
+    p7 = myList[xOffSet - math.floor(0.707 * locMin[0][0]),yOffSet - math.floor(0.707 * locMin[1][0])]
+    p8 = myList[xOffSet - math.floor(0.707 * locMin[0][0]),yOffSet + math.floor(0.707 * locMin[1][0])]
+    pAvg = 0.125*(p1 + p2 + p3 + p4 + p5 + p6 + p7 + p8)
 
-    pThresh = btMin/0.7
+    pThresh = btMin/0.8
 
 
-#    if p1 > pThresh or p2 > pThresh or p3 > pThresh or p4 > pThresh:
-    if pavg > pThresh:
+    if pAvg > pThresh:
         indicator = 0
 
     else:
         indicator = 1
         
-    return indicator, lonMin, latMin
+    return indicator, lonMin, latMin, p1, p2, p3, p4, xOffSet, yOffSet, locMin, p5, p6, p7, p8, pAvg
