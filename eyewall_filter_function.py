@@ -28,7 +28,7 @@ def filter_function(bt, s, myList, r):
     p6 = myList[xOffSet + math.floor(0.707 * locMin[0][0]),yOffSet - math.floor(0.707 * locMin[1][0])]
     p7 = myList[xOffSet - math.floor(0.707 * locMin[0][0]),yOffSet - math.floor(0.707 * locMin[1][0])]
     p8 = myList[xOffSet - math.floor(0.707 * locMin[0][0]),yOffSet + math.floor(0.707 * locMin[1][0])]
-    pAvg = 0.125*(p1 + p2 + p3 + p4 + p5 + p6 + p7 + p8)
+    pAvg = 0.125 * (p1 + p2 + p3 + p4 + p5 + p6 + p7 + p8)
 
     pThresh = btMin/0.8
 
