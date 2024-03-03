@@ -54,18 +54,18 @@ latMin = np.mean(bt.latitude.data[yMid - r1 + locMin[1]])
 xOffSet = xMid - r1
 yOffSet = yMid - r1
 
-p1 = myList[xOffSet + locMin[0],yOffSet + locMin[1]][0]
-p2 = myList[xOffSet + locMin[0],yOffSet - locMin[1]][0]
-p3 = myList[xOffSet - locMin[0],yOffSet - locMin[1]][0]
-p4 = myList[xOffSet - locMin[0],yOffSet + locMin[1]][0]
-p5 = myList[xOffSet + math.floor(0.707 * locMin[0][0]),yOffSet + math.floor(0.707 * locMin[1][0])]
-p6 = myList[xOffSet + math.floor(0.707 * locMin[0][0]),yOffSet - math.floor(0.707 * locMin[1][0])]
-p7 = myList[xOffSet - math.floor(0.707 * locMin[0][0]),yOffSet - math.floor(0.707 * locMin[1][0])]
-p8 = myList[xOffSet - math.floor(0.707 * locMin[0][0]),yOffSet + math.floor(0.707 * locMin[1][0])]
+p1 = myList[math.floor(xMid + locMin[0][0]),yMid]
+p2 = myList[math.floor(xMid - locMin[0][0]),yMid]
+p3 = myList[xMid,math.floor(yMid - locMin[1][0])]
+p4 = myList[xMid,math.floor(yMid + locMin[1][0])]
+p5 = myList[xMid + math.floor(0.707 * locMin[0][0]),yMid + math.floor(0.707 * locMin[1][0])]
+p6 = myList[xMid + math.floor(0.707 * locMin[0][0]),yMid - math.floor(0.707 * locMin[1][0])]
+p7 = myList[xMid - math.floor(0.707 * locMin[0][0]),yMid + math.floor(0.707 * locMin[1][0])]
+p8 = myList[xMid - math.floor(0.707 * locMin[0][0]),yMid - math.floor(0.707 * locMin[1][0])]
 pAvg = 0.125*(p1 + p2 + p3 + p4 + p5 + p6 + p7 + p8)
 #pAvg = 0.25*(p1 + p2 + p3 + p4)
 
-pThresh = btMin/0.8
+pThresh = btMin/0.77
 
 
 if pAvg > pThresh:
@@ -74,13 +74,29 @@ if pAvg > pThresh:
 else:
     indicator = 1
 
-lonP1 = bt.longitude.data[math.floor(xOffSet + locMin[0][0])]
-latP1 = bt.latitude.data[math.floor(yOffSet + locMin[1][0])]
-lonP2 = lonP1
-latP2 = bt.latitude.data[math.floor(yOffSet - locMin[1][0])]
-lonP3 = bt.longitude.data[math.floor(xOffSet - locMin[0][0])]
-latP3 = latP2
+lonP1 = bt.longitude.data[math.floor(xMid + locMin[0][0])]
+latP1 = bt.latitude.data[yMid]
+lonP2 = bt.longitude.data[math.floor(xMid - locMin[0][0])]
+latP2 = bt.latitude.data[yMid]
+lonP3 = bt.longitude.data[xMid]
+latP3 = bt.latitude.data[math.floor(yMid - locMin[1][0])]
+lonP4 = bt.longitude.data[xMid]
+latP4 = bt.latitude.data[math.floor(yMid + locMin[1][0])]
+lonP5 = bt.longitude.data[xMid + math.floor(0.707 * locMin[0][0])]
+latP5 = bt.latitude.data[yMid + math.floor(0.707 * locMin[1][0])]
+lonP6 = bt.longitude.data[xMid + math.floor(0.707 * locMin[0][0])]
+latP6 = bt.latitude.data[yMid - math.floor(0.707 * locMin[1][0])]
+lonP7 = bt.longitude.data[xMid - math.floor(0.707 * locMin[0][0])]
+latP7 = bt.latitude.data[yMid + math.floor(0.707 * locMin[1][0])]
+lonP8 = bt.longitude.data[xMid - math.floor(0.707 * locMin[0][0])]
+latP8 = bt.latitude.data[yMid - math.floor(0.707 * locMin[1][0])]
 
-print("P1 is at (" + str(lonP1) + "," + str(latP1) + ")")
-print("P2 is at (" + str(lonP2) + "," + str(latP2) + ")")
-print("P3 is at (" + str(lonP3) + "," + str(latP3) + ")")
+print("The mid value is (" + str(lonMid) + "," + str(latMid) + ") with P Min = ")
+print("P1 is at (" + str(lonP1) + "," + str(latP1) + ") with P1 = " + str(p1))
+print("P2 is at (" + str(lonP2) + "," + str(latP2) + ") with P2 = " + str(p2))
+print("P3 is at (" + str(lonP3) + "," + str(latP3) + ") with P3 = " + str(p3))
+print("P4 is at (" + str(lonP4) + "," + str(latP4) + ") with P4 = " + str(p4))
+print("P5 is at (" + str(lonP5) + "," + str(latP5) + ") with P5 = " + str(p5))
+print("P6 is at (" + str(lonP6) + "," + str(latP6) + ") with P6 = " + str(p6))
+print("P7 is at (" + str(lonP7) + "," + str(latP7) + ") with P7 = " + str(p7))
+print("P8 is at (" + str(lonP8) + "," + str(latP8) + ") with P8 = " + str(p8))
