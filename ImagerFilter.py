@@ -2,8 +2,6 @@ import numpy as np
 import math
 import xarray
 
-#fp = '20200822T204500.nc' Break glass in case of emergency
-
 def filter(fp):
     dataset = xarray.open_dataset(fp)
     bt = dataset.mimic_tc_89GHz_bt
@@ -41,7 +39,7 @@ def filter(fp):
  #   print(btCenter)
     
     #Remember to add the secondary eyewall values later
-    if btCenter < 265 or latMid > 29:
+    if btCenter < 265:
         radius_1 = 0
         radius_2 = 0
         lonMid = 0
@@ -50,6 +48,38 @@ def filter(fp):
         sLatMid = 0
         moat_width = 0
         btCenter = 0
+        lonP1 = 0
+        latP1 = 0
+        lonP2 = 0
+        latP2 = 0
+        lonP3 = 0
+        latP3 = 0
+        lonP4 = 0
+        latP4 = 0
+        lonP5 = 0
+        latP5 = 0
+        lonP6 = 0
+        latP6 = 0
+        lonP7 = 0
+        latP7 = 0
+        lonP8 = 0
+        latP8 = 0
+        slonP1 = 0
+        slatP1 = 0
+        slonP2 = 0
+        slatP2 = 0
+        slonP3 = 0
+        slatP3 = 0
+        slonP4 = 0
+        slatP4 = 0
+        slonP5 = 0
+        slatP5 = 0
+        slonP6 = 0
+        slatP6 = 0
+        slonP7 = 0
+        slatP7 = 0
+        slonP8 = 0
+        slatP8 = 0
         #print('The eye has not formed')
 
     elif btCenter >= 265:
@@ -61,7 +91,34 @@ def filter(fp):
         pIndicator = result[0]
         lonMin = result[1]
         latMin = result[2]
-   
+        p1 = result[3]
+        p2 = result[4]
+        p3 = result[5]
+        p4 = result[6]
+        p5 = result[7]
+        p6 = result[8]
+        p7 = result[9]
+        p8 = result[10]
+        pAvg = result[11]
+        lonP1 = result[12]
+        latP1 = result[13]
+        lonP2 = result[14]
+        latP2 = result[15]
+        lonP3 = result[16]
+        latP3 = result[17]
+        lonP4 = result[18]
+        latP4 = result[19]
+        lonP5 = result[20]
+        latP5 = result[21]
+        lonP6 = result[22]
+        latP6 = result[23]
+        lonP7 = result[24]
+        latP7 = result[25]
+        lonP8 = result[26]
+        latP8 = result[27]
+
+
+        
         if pIndicator == 0:
             #print('Not a primary eyewall')
             #print('Not a secondary eyewall')
@@ -73,6 +130,38 @@ def filter(fp):
             sLatMid = 0
             moat_width = 0
             btCenter = 0
+            lonP1 = 0
+            latP1 = 0
+            lonP2 = 0
+            latP2 = 0
+            lonP3 = 0
+            latP3 = 0
+            lonP4 = 0
+            latP4 = 0
+            lonP5 = 0
+            latP5 = 0
+            lonP6 = 0
+            latP6 = 0
+            lonP7 = 0
+            latP7 = 0
+            lonP8 = 0
+            latP8 = 0
+            slonP1 = 0
+            slatP1 = 0
+            slonP2 = 0
+            slatP2 = 0
+            slonP3 = 0
+            slatP3 = 0
+            slonP4 = 0
+            slatP4 = 0
+            slonP5 = 0
+            slatP5 = 0
+            slonP6 = 0
+            slatP6 = 0
+            slonP7 = 0
+            slatP7 = 0
+            slonP8 = 0
+            slatP8 = 0
         elif pIndicator != 0:
 
             lat1 = math.radians(latMid)
@@ -129,14 +218,38 @@ def filter(fp):
             sIndicator = result[0]
             sLonMid = result[1]
             sLatMid = result[2]
-
+            sp1 = result[3]
+            sp2 = result[4]
+            sp3 = result[5]
+            sp4 = result[6]
+            sp5 = result[7]
+            sp6 = result[8]
+            sp7 = result[9]
+            sp8 = result[10]
+            spAvg = result[11]
+            slonP1 = result[12]
+            slatP1 = result[13]
+            slonP2 = result[14]
+            slatP2 = result[15]
+            slonP3 = result[16]
+            slatP3 = result[17]
+            slonP4 = result[18]
+            slatP4 = result[19]
+            slonP5 = result[20]
+            slatP5 = result[21]
+            slonP6 = result[22]
+            slatP6 = result[23]
+            slonP7 = result[24]
+            slatP7 = result[25]
+            slonP8 = result[26]
+            slatP8 = result[27]
+        
 
             if sIndicator == 0:
                 #print('Not a secondary eyewall')
                 radius_2 = 0
                 moat_width = 0
-                sLonMid = 0
-                sLatMid = 0
+            
             elif sIndicator != 0:
                 #Find secondary eyewall radius using haversine formula
 
@@ -154,14 +267,8 @@ def filter(fp):
 
                 r = 6371 #Radius of Earth in Kilometers
 
-                radius_2 = c * r
+                radius_2 =   c * r
 
                 moat_width = radius_2 - radius_1
-                if radius_2 < 2*radius_1:
-                    radius_2 = 0
-                    lon_2 = 0
-                    lat_2 = 0
-                    bright_2 = 0
-                    moat_width = 0
-
-    return radius_1, radius_2, , moat_width, lonMid, latMid, btCenter, sLonMid, sLatMid
+  
+    return lonP1, latP1, lonP2, latP2, lonP3, latP3, lonP4, latP4, lonP5, latP5, lonP6, latP6, lonP7, latP7, lonP8, latP8, slonP1, slatP1, slonP2, slatP2, slonP3, slatP3, slonP4, slatP4, slonP5, slatP5, slonP6, slatP6, slonP7, slatP7, slonP8, slatP8, radius_1, radius_2, moat_width, lonMin, latMin

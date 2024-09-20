@@ -9,14 +9,7 @@ print('starting')
 
 from eyewall_filter import filter
 
-#fp = "C:/Users/mlhuo_dkvynem/Downloads/Luara Data/20200826T090000.nc"
-
-#result = eyewallScanner(fp, radPrime)
-
-#print(result)
-
-#path = "C:/Users/mlhuo_dkvynem/Downloads/Luara Data"
-path = "C:/Users/gwilli18/Desktop/Eyewall Routine"
+path = "C:/Users/mlhuo_dkvynem/Downloads/Iota Data"
 os.chdir(path)
 
 #Count the number of .nc files
@@ -35,11 +28,12 @@ for file in os.listdir():
         result = filter(file)
         x[count,:] = result
     count = count + 1
-    #print(x[count, 3])
+    print(count)
+
 
 #Save output
 df = pandas.DataFrame(x)
-df.to_excel("Eyewall.xlsx")
+df.to_excel("Iota Eyewall.xlsx")
 
 
 print('finished')

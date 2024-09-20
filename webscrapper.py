@@ -2,7 +2,7 @@
 
 import requests
 
-url = 'https://tropic.ssec.wisc.edu/archive/mimtc/2020_13L/web/data/'
+url = 'https://tropic.ssec.wisc.edu/archive/mimtc/2020_31L/web/data/'
 page = requests.get(url).text
 
 from bs4 import BeautifulSoup
