@@ -1,3 +1,10 @@
+'''
+Author: Mitchel Huott
+Name: eyewall_filter.py
+Function: Not really
+'''
+
+
 import numpy as np
 import math
 import xarray
