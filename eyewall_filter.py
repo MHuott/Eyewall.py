@@ -21,6 +21,8 @@ def filter(fp):
     x = np.linspace(bt.longitude.min().data, bt.longitude.max().data, rows)
     y = np.linspace(bt.latitude.min().data, bt.longitude.max().data, columns)
     X, Y = np.meshgrid(y, x)
+    btData = np.zeros(rows)
+    radius = np.zeros(rows)
 
     #Converted Xbarray into a numpy array
     myList = np.zeros((rows, columns))
@@ -39,136 +41,55 @@ def filter(fp):
 
     btCenter = myList[xMid,yMid]
 
-    r1 = 10
+    from hurricane_slicer import hurricaneslicer
 
-    s = myList[xMid - r1:xMid + r1,yMid - r1:yMid + r1]
-
-    ###print(r1)
-
- #   print(btCenter)
-    
-    #Remember to add the secondary eyewall values later
-    if btCenter < 265 or latMid > 29:
-        radius_1 = 0
-        radius_2 = 0
-        lonMid = 0
-        latMid = 0
-        sLonMid = 0
-        sLatMid = 0
-        moat_width = 0
-        btCenter = 0
-        #print('The eye has not formed')
-
-    elif btCenter >= 265:
-
-        from eyewall_filter_function import filter_function
-        result = filter_function(bt, s, myList, r1)
-#        print(result[0])
-        
-        pIndicator = result[0]
-        lonMin = result[1]
-        latMin = result[2]
-   
-        if pIndicator == 0:
-            #print('Not a primary eyewall')
-            #print('Not a secondary eyewall')
-            radius_1 = 0
-            radius_2 = 0
-            lonMid = 0
-            latMid = 0
-            sLonMid = 0
-            sLatMid = 0
-            moat_width = 0
-            btCenter = 0
-        elif pIndicator != 0:
-
-            lat1 = math.radians(latMid)
-            lat2 = math.radians(latMin)
-            lon1 = math.radians(lonMid)
-            lon2 = math.radians(lonMin)
-
-            #This is the difference in longitude and latitude
-            dLon = lon2 - lon1
-            dLat = lat2 - lat1
-
-            #This value takes the difference in the dLon and dLat and 
-            a = math.sin(dLat / 2)**2 + math.cos(lat1) * math.cos(lat2) * math.sin(dLon/2)**2
-            c = 2 * math.asin(math.sqrt(a))
-            r = 6371 #radius of earth in kilometers
-
-            radius_1 = c * r
-
-            #Convert bt array into np array
-
-            for i in range(rows):
-                for j in range(columns):
-                    if bt.data[i][j] > 0:
-                        myList[i,j] = bt.data[i][j]                                                         
-                    else:
-                        myList[i,j] = 320                                                           
+    for r in range(rows):
+        result = hurricaneslicer(bt, myList, r)
+        btData[r] = result
+        radius[i] = r
 
 
-            #Find secondary eyewall location
+    lat1 = math.radians(latMid)
+    lat2 = math.radians(latMin)
+    lon1 = math.radians(lonMid)
+    lon2 = math.radians(lonMin)
 
-            #We are defining new parameters to define the range of grid points we are searching on
-            r2 = math.floor(3 * r1) 
+    #This is the difference in longitude and latitude
+    dLon = lon2 - lon1
+    dLat = lat2 - lat1
 
-            s2 = myList[xMid - r2:xMid + r2,yMid - r2:yMid + r2]
+    #This value takes the difference in the dLon and dLat and
+    a = math.sin(dLat / 2)**2 + math.cos(lat1) * math.cos(lat2) * math.sin(dLon/2)**2
+    c = 2 * math.asin(math.sqrt(a))
+    r = 6371 #radius of earth in kilometers
 
-            #This is setting up and array from the primary eyewall
-            xMid2 = math.floor(len(s2) / 2) 
-            yMid2 = math.floor(len(s2) / 2)
-            x1 = xMid2 - r1
-            x2 = xMid2 + r1
-            y1 = yMid2 - r1
-            y2 = yMid2 + r1
+    radius_1 = c * r
 
-            #This takes the array for the primary eyewall and "removes" the values by setting them super high
-            for i in range(2 * r2):
-                for j in range(2 * r2):
-                    if i >= x1 and i <= x2 and j >= y1 and j <= y2:
-                        s2[i,j] = 900
+    #Convert bt array into np array
 
-            from eyewall_filter_function import filter_function
-
-            result = filter_function(bt, s2, myList, r1)
-
-            sIndicator = result[0]
-            sLonMid = result[1]
-            sLatMid = result[2]
+    for i in range(rows):
+        for j in range(columns):
+            if bt.data[i][j] > 0:
+                myList[i,j] = bt.data[i][j]
+            else:
+                myList[i,j] = 320
 
 
-            if sIndicator == 0:
-                #print('Not a secondary eyewall')
-                radius_2 = 0
-                moat_width = 0
-                sLonMid = 0
-                sLatMid = 0
-            elif sIndicator != 0:
-                #Find secondary eyewall radius using haversine formula
+    #Find secondary eyewall location
 
-                lat1 = math.radians(latMid)
-                lat2 = math.radians(sLatMid)
-                lon1 = math.radians(lonMid)
-                lon2 = math.radians(sLonMid)
-    
-                dLon = lon2 - lon1
-                dLat = lat2 - lat1
+    #We are defining new parameters to define the range of grid points we are searching on
+    r2 = math.floor(3 * r1)
 
-                a = math.sin(dLat / 2)**2 + math.cos(lat1) * math.cos(lat2) * math.sin(dLon/2)**2
-    
-                c = 2 * math.asin(math.sqrt(a))
+    s2 = myList[xMid - r2:xMid + r2,yMid - r2:yMid + r2]
 
-                r = 6371 #Radius of Earth in Kilometers
+    #This is setting up and array from the primary eyewall
+    xMid2 = math.floor(len(s2) / 2)
+    yMid2 = math.floor(len(s2) / 2)
+    x1 = xMid2 - r1
+    x2 = xMid2 + r1
+    y1 = yMid2 - r1
+    y2 = yMid2 + r1
 
-                radius_2 = c * r
 
-                moat_width = radius_2 - radius_1
-                if radius_2 < 2*radius_1:
-                    radius_2 = 0
-                    lon_2 = 0
-                    lat_2 = 0
-                    bright_2 = 0
-                    moat_width = 0
 
-    return radius_1, radius_2, , moat_width, lonMid, latMid, btCenter, sLonMid, sLatMid
+    return

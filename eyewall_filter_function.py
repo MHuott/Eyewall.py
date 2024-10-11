@@ -36,7 +36,7 @@ def filter_function(bt, s, myList, r):
     else:
         indicator = 1
 
-    dis = distance formula
+    dis = distance * formula
 
     lonP1 = np.mean(bt.longitude.data[xMid + math.floor(dis * locMin[0][0])])
     latP1 = np.mean(bt.latitude.data[yMid])
