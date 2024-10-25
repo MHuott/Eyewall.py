@@ -36,16 +36,14 @@ def filter_function(bt, s, myList, r):
     else:
         indicator = 1
 
-    dis = distance * formula
-
-    lonP1 = np.mean(bt.longitude.data[xMid + math.floor(dis * locMin[0][0])])
+    lonP1 = np.mean(bt.longitude.data[xMid + math.floor(locMin[0][0])])
     latP1 = np.mean(bt.latitude.data[yMid])
-    lonP2 = bt.longitude.data[xMid - math.floor(dis * locMin[0][0])]
+    lonP2 = bt.longitude.data[xMid - math.floor(locMin[0][0])]
     latP2 = bt.latitude.data[yMid]
     lonP3 = bt.longitude.data[xMid]   
-    latP3 = bt.latitude.data[yMid - math.floor(dis * locMin[1][0])]
+    latP3 = bt.latitude.data[yMid - math.floor(locMin[1][0])]
     lonP4 = bt.longitude.data[xMid]
-    latP4 = bt.latitude.data[yMid + math.floor(dis * locMin[1][0])]
+    latP4 = bt.latitude.data[yMid + math.floor(locMin[1][0])]
 
     lonP5 = bt.longitude.data[xMid + math.floor(0.707 * locMin[0][0])]
     latP5 = bt.latitude.data[yMid + math.floor(0.707 * locMin[1][0])]

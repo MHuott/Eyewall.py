@@ -211,6 +211,7 @@ def filter(fp):
                     if i >= x1 and i <= x2 and j >= y1 and j <= y2:
                         s2[i,j] = 900
 
+
             from eyewall_filter_function import filter_function
 
             result = filter_function(bt, s2, myList, r1)

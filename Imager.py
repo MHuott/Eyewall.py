@@ -4,7 +4,7 @@ import numpy as np
 import math
 import xarray
 
-fp = "C:/Users/mlhuo_dkvynem/Downloads/Iota Data/20201116T163000.nc"
+fp = "20201117T140000.nc"
 #fp = "C:/Users/mlhuo_dkvynem/Downloads/Teddy Data/20200916T121500.nc"
 
 dataset = xarray.open_dataset(fp)
@@ -16,6 +16,7 @@ columns = len(bt.latitude)
 x = np.linspace(bt.longitude.min().data,bt.longitude.max().data,rows)
 y = np.linspace(bt.latitude.min().data, bt.latitude.max().data, columns)
 X, Y = np.meshgrid(y, x)
+
 
 from ImagerFilter import filter
 result = filter(fp)

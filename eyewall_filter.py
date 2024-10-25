@@ -4,14 +4,16 @@ Name: eyewall_filter.py
 Function: Not really
 '''
 
-
 import numpy as np
 import math
 import xarray
+import matplotlib.pyplot as plt
 
-#fp = '20200822T204500.nc' Break glass in case of emergency
+fp = "20201116T100000.nc"  #Break glass in case of emergency
+
 
 def filter(fp):
+    print(fp)
     dataset = xarray.open_dataset(fp)
     bt = dataset.mimic_tc_89GHz_bt
     btMax = 0
@@ -21,34 +23,59 @@ def filter(fp):
     x = np.linspace(bt.longitude.min().data, bt.longitude.max().data, rows)
     y = np.linspace(bt.latitude.min().data, bt.longitude.max().data, columns)
     X, Y = np.meshgrid(y, x)
-    btData = np.zeros(rows)
     radius = np.zeros(rows)
 
     #Converted Xbarray into a numpy array
     myList = np.zeros((rows, columns))
-    for i in range (rows):
+    for i in range(rows):
         for j in range(columns):
             if bt.data[i][j] > 0:
                 myList[i][j] = bt.data[i][j]
             else:
                 myList[i][j] = 320
 
-    xMid = (math.floor)(rows/2)
-    yMid = (math.floor)(columns/2)
+    xMid = (math.floor)(rows / 2)
+    yMid = (math.floor)(columns / 2)
+
+    btData = np.zeros(yMid)
+
+    print(xMid, yMid)
 
     lonMid = bt.longitude.data[xMid]
     latMid = bt.latitude.data[yMid]
 
-    btCenter = myList[xMid,yMid]
+    btCenter = myList[xMid, yMid]
 
     from hurricane_slicer import hurricaneslicer
 
-    for r in range(rows):
+    for r in range(yMid):
         result = hurricaneslicer(bt, myList, r)
         btData[r] = result
         radius[i] = r
 
+    plt.style.use('ggplot')
 
+    # make data
+    x = np.linspace(0, yMid, yMid)
+    y = btData
+
+    # plot
+    fig, ax = plt.subplots()
+
+    ax.plot(x, y, linewidth=2.0)
+
+    plt.title("BT Avg with radius")
+
+    plt.show()
+    plt.xlabel("Not actually radius, will fix later")
+
+    plt.savefig("output.jpg")
+
+
+    return
+
+
+'''
     lat1 = math.radians(latMid)
     lat2 = math.radians(latMin)
     lon1 = math.radians(lonMid)
@@ -89,7 +116,6 @@ def filter(fp):
     x2 = xMid2 + r1
     y1 = yMid2 - r1
     y2 = yMid2 + r1
+'''
 
-
-
-    return
+filter(fp)
