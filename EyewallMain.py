@@ -9,7 +9,7 @@ print('starting')
 
 from eyewall_filter import filter
 
-path = "C:/Users/mlhuo_dkvynem/Downloads/Iota Data"
+path = r'C:\Users\mlhuo\PycharmProjects\Eyewall.py\netcdf4Images'
 os.chdir(path)
 
 #Count the number of .nc files
@@ -18,17 +18,18 @@ for file in os.listdir():
     if file.endswith(".nc"):
         imageCount = imageCount + 1
 
+print(imageCount)
 #Iterate for .nc files
-x = np.zeros((imageCount, 8))
+x = np.zeros((imageCount, 2))
+print(np.shape(x))
 count = 0
 
 for file in os.listdir():
     if file.endswith(".nc"):
         fp = f"{path}/{file}"
-        result = filter(file)
-        x[count,:] = result
+        result = filter(file, count)
+        x[count , :] = result
     count = count + 1
-    print(count)
 
 
 #Save output
