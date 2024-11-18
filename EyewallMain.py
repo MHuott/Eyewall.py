@@ -18,17 +18,15 @@ for file in os.listdir():
     if file.endswith(".nc"):
         imageCount = imageCount + 1
 
-print(imageCount)
 #Iterate for .nc files
-x = np.zeros((imageCount, 2))
-print(np.shape(x))
+x = np.zeros((imageCount, 4))
 count = 0
-
 for file in os.listdir():
     if file.endswith(".nc"):
         fp = f"{path}/{file}"
         result = filter(file, count)
         x[count , :] = result
+        print(fp)
     count = count + 1
 
 
