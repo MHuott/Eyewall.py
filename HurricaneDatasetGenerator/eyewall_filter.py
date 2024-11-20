@@ -53,10 +53,12 @@ def filter(fp, count):
         btData[r] = result[0]
         radius[r] = result[1]
 
-    primaryBT = np.min(btData)
-    primaryIndex = np.where(btData == primaryBT)
-    primaryRadius = radius[primaryIndex][0]
+    primaryIndex = eyewall_gradient(btData, radius, 0)
+    print(primaryIndex)
+    primaryBT = btData[primaryIndex]
+    primaryRadius = radius[primaryIndex]
 
+    '''
     if len(primaryIndex[0]) > 1:
         primaryIndex = np.delete(primaryIndex[0], 0)
         print(primaryIndex)
@@ -64,11 +66,31 @@ def filter(fp, count):
         array = []
         array.append(primaryIndex)
         primaryIndex = array
+    '''
 
-    secondaryIndex = eyewall_gradient(btData, radius, primaryIndex[0])
+    secondaryIndex = eyewall_gradient(btData, radius, primaryIndex)
 
-    secondaryBT = btData[secondaryIndex[0]]
-    secondaryRadius = radius[secondaryIndex[0]]
+    secondaryBT = btData[secondaryIndex]
+    secondaryRadius = radius[secondaryIndex]
+
+    plt.style.use('ggplot')
+
+    # make data
+    x = radius
+    y = btData
+
+    # plot
+    fig, ax = plt.subplots()
+
+    ax.plot(x, y, linewidth=2.0)
+
+    plt.title("BT Avg with radius")
+    plt.xlabel("Radius (km)")
+    plt.savefig("new" + str(count) + ".jpg")
+
+    # plt.close('all')
+    plt.show()
+
 
     return primaryRadius, primaryBT, secondaryRadius, secondaryBT
 

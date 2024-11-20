@@ -12,7 +12,7 @@ def eyewall_gradient(btData, radius, minLoc):
     primary eyewall location.
     '''
 
-    newLength = len(btData) - (minLoc[0] + 1)
+    newLength = len(btData) - (minLoc + 1)
 
     new_btData = np.zeros(newLength)
     new_radius = np.zeros(newLength)
