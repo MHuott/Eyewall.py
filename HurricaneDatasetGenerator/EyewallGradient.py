@@ -1,4 +1,9 @@
-#Eyewall Gradient
+'''
+Author: Mitchel Huott
+Name: EyewallGradient.py
+Function: This is a simple if statement that finds the local
+minimums of the functions
+'''
 
 import numpy as np
 import math

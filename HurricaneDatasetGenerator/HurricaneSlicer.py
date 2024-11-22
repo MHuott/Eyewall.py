@@ -1,8 +1,14 @@
+'''
+Author: Mitchel Huott
+Name: HurricaneSlicer.py
+Function: This slices the hurricane into thin disks whose BT average we find
+'''
+
 import numpy as np
 import math
 import xarray
 
-def hurricaneslicer(bt, myList, r):
+def hurricane_slicer(bt, myList, r):
     rows = len(bt.longitude)
     columns = len(bt.latitude)
     xMid = (math.floor)(rows / 2)

@@ -1,4 +1,9 @@
-#Eyewall Main
+'''
+Author: Mitchel Huott
+Name: EyewallDatasetGenerator_Main.py
+Function: This is the main function where the user gets the dataset they want
+          from the desired location.
+'''
 
 import numpy as np
 import math
@@ -7,7 +12,7 @@ import pandas
 
 print('starting')
 
-from eyewall_filter import filter
+from EyewallDataStripper import filter
 
 path = r'C:\Users\mlhuo\PycharmProjects\Eyewall.py\netcdf4Images'
 #path = r'C:\Users\mlhuo\PycharmProjects\Eyewall.py'
