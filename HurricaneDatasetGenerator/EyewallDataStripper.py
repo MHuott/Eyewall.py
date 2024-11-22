@@ -54,7 +54,6 @@ def filter(fp, count):
         radius[r] = result[1]
 
     primaryIndex = eyewall_gradient(btData, radius, 0)
-    print(primaryIndex)
     primaryBT = btData[primaryIndex]
     primaryRadius = radius[primaryIndex]
 
@@ -72,24 +71,6 @@ def filter(fp, count):
 
     secondaryBT = btData[secondaryIndex]
     secondaryRadius = radius[secondaryIndex]
-
-    plt.style.use('ggplot')
-
-    # make data
-    x = radius
-    y = btData
-
-    # plot
-    fig, ax = plt.subplots()
-
-    ax.plot(x, y, linewidth=2.0)
-
-    plt.title("BT Avg with radius")
-    plt.xlabel("Radius (km)")
-    plt.savefig("new" + str(count) + ".jpg")
-
-    # plt.close('all')
-    plt.show()
 
 
     return primaryRadius, primaryBT, secondaryRadius, secondaryBT
@@ -119,5 +100,5 @@ def filter(fp, count):
 
 
 
-print(filter(fp, 1000))
-print(filter("20201113T221500.nc", 1000))
+#print(filter(fp, 1000))
+#print(filter("20201113T221500.nc", 1000))

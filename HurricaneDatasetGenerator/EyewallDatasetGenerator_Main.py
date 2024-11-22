@@ -10,6 +10,7 @@ print('starting')
 from eyewall_filter import filter
 
 path = r'C:\Users\mlhuo\PycharmProjects\Eyewall.py\netcdf4Images'
+#path = r'C:\Users\mlhuo\PycharmProjects\Eyewall.py'
 os.chdir(path)
 
 #Count the number of .nc files
@@ -26,12 +27,12 @@ for file in os.listdir():
         fp = f"{path}/{file}"
         result = filter(file, count)
         x[count , :] = result
-        print(fp)
     count = count + 1
 
-
+columns = ['Primary Radius', 'Primary BT', 'Secondary Radius', 'Secondary BT']
 #Save output
-df = pandas.DataFrame(x)
+df = pandas.DataFrame(x, columns = columns)
+
 df.to_excel("Iota Eyewall.xlsx")
 
 
