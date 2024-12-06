@@ -1,1 +1,1 @@
-Hello my name is jeff
+These datasets were created for public usa using the code above.  Each dataset was visually culled for greater accuracy.  Please reach out to the Repo owner if any errors are found in the dataset.
