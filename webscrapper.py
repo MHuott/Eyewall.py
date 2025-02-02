@@ -6,17 +6,7 @@ import os
 import urllib.request
 from bs4 import BeautifulSoup
 
-urls = ['https://tropic.ssec.wisc.edu/archive/mimtc/2021_11L/web/data/',
-        'https://tropic.ssec.wisc.edu/archive/mimtc/2021_12E/web/data/',
-        'https://tropic.ssec.wisc.edu/archive/mimtc/2021_12L/web/data/',
-        'https://tropic.ssec.wisc.edu/archive/mimtc/2021_13E/web/data/',
-        'https://tropic.ssec.wisc.edu/archive/mimtc/2021_13L/web/data/',
-        'https://tropic.ssec.wisc.edu/archive/mimtc/2021_14E/web/data/',
-        'https://tropic.ssec.wisc.edu/archive/mimtc/2021_14L/web/data/',
-        'https://tropic.ssec.wisc.edu/archive/mimtc/2021_15E/web/data/',
-        'https://tropic.ssec.wisc.edu/archive/mimtc/2021_15L/web/data/',
-        'https://tropic.ssec.wisc.edu/archive/mimtc/2021_16E/web/data/',
-        'https://tropic.ssec.wisc.edu/archive/mimtc/2021_16L/web/data/']
+urls = ['url']
 
 for url in urls:
 
