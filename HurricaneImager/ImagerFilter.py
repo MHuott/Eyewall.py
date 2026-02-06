@@ -84,7 +84,7 @@ def filter(fp):
 
     elif btCenter >= 265:
 
-        from eyewall_filter_function import filter_function
+        from HurricaneImager.eyewall_filter_function import filter_function
         result = filter_function(bt, s, myList, r1)
 #        print(result[0])
         
@@ -212,7 +212,7 @@ def filter(fp):
                         s2[i,j] = 900
 
 
-            from eyewall_filter_function import filter_function
+            from HurricaneImager.eyewall_filter_function import filter_function
 
             result = filter_function(bt, s2, myList, r1)
 

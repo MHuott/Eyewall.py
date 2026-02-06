@@ -4,7 +4,7 @@ import numpy as np
 import math
 import xarray
 
-fp = "20201116T100000.nc"
+fp = '/Volumes/MHUOTT_PHYS/Hurricane Research/Tropical Cylone/Tropical Cyclone Data/2020 Season/2020 Iota/20201117T080000.nc'
 #fp = "C:/Users/mlhuo_dkvynem/Downloads/Teddy Data/20200916T121500.nc"
 
 dataset = xarray.open_dataset(fp)
@@ -91,10 +91,9 @@ if slonP1 != 0:
 
 csfont = {'fontname':'Times New Roman'}
 
-plt.title("2020/11/16 at Time:16:00:00", **csfont, fontsize = 20)
-plt.xlabel("Longitude", **csfont, fontsize = 20)
-plt.ylabel("Latitude", **csfont, fontsize = 20)
-#plt.axis('scaled')
-
+plt.xlabel("Longitude", **csfont, fontsize = 15)
+plt.ylabel("Latitude", **csfont, fontsize = 15)
+plt.axis('scaled')
+plt.savefig("HurricaneIota2.png")
 plt.show()
 
