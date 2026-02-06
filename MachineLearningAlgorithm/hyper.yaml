@@ -1,0 +1,7 @@
+batchSize: 32
+
+learningRate: 0.001
+
+epochs: 3000
+
+trainRatio: 0.8
