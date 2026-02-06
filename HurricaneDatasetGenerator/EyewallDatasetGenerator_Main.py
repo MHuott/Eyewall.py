@@ -14,7 +14,7 @@ print('starting')
 
 from EyewallDataStripper import filter
 
-path = r'C:\Users\mlhuo\PycharmProjects\Eyewall.py\netcdf4Images'
+path = '/Volumes/MHUOTT_PHYS/Hurricane Research/Tropical Cylone/Tropical Cyclone Data/2021 Season/2021_12L Larry !!'
 #path = r'C:\Users\mlhuo\PycharmProjects\Eyewall.py'
 os.chdir(path)
 
@@ -30,7 +30,9 @@ count = 0
 for file in os.listdir():
     if file.endswith(".nc"):
         fp = f"{path}/{file}"
+        print(fp)
         result = filter(file, count)
+        #print(fp, result)
         x[count , :] = result
     count = count + 1
 
@@ -38,7 +40,7 @@ columns = ['Primary Radius', 'Primary BT', 'Secondary Radius', 'Secondary BT']
 #Save output
 df = pandas.DataFrame(x, columns = columns)
 
-df.to_excel("Iota Eyewall.xlsx")
+df.to_excel("Smoothed Genevieve Eyewall Alt.xlsx")
 
 
 print('finished')

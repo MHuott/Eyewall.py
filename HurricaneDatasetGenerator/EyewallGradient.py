@@ -11,30 +11,20 @@ import xarray
 import matplotlib.pyplot as plt
 
 def eyewall_gradient(btData, radius, minLoc):
-    '''
-    This creates a new set of data so we can find our secondary
-    eyewall location.  The first point is the location of the
-    primary eyewall location.
-    '''
-
-    newLength = len(btData) - (minLoc + 1)
-
-    new_btData = np.zeros(newLength)
-    new_radius = np.zeros(newLength)
-
-    for i in range(newLength):
-        new_btData[i] = btData[i + minLoc]
-        new_radius[i] = radius[i + minLoc]
+    new_btData = btData[minLoc + 1:]
+    new_radius = radius[minLoc + 1:]
 
     index = 0
     check = 0
-    for i in range(newLength):
+    for i in range(len(new_btData) - 1):  # Prevent out-of-bounds
         if new_btData[i] < new_btData[i + 1] and check == 0:
-            index = index + 1
-        if new_btData[i] > new_btData[i + 1]:
-            index = index + 1
+            index += 1
+        elif new_btData[i] > new_btData[i + 1]:
+            index += 1
             check = 1
-        if new_btData[i] < new_btData[i + 1] and check == 1:
+        elif new_btData[i] < new_btData[i + 1] and check == 1:
             break
+        if i + minLoc >= len(btData) - 2:  # More robust condition
+            return -1
 
-    return index + minLoc
+    return index + minLoc + 1
